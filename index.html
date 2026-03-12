@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MovieFy — Discover Films</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="logo" onclick="goHome()">Movi<span>Fy</span></div>
+  <div class="nav-links">
+    <a href="#moviesSection" class="nav-btn active" onclick="switchTab('movies', this)">Movies</a>
+    <a href="#tvSection" class="nav-btn" onclick="switchTab('tv', this)">TV Shows</a>
+    <a href="#trendingSection" class="nav-btn" onclick="switchTab('trending', this)">Trending</a>
+  </div>
+  <div class="search-wrap">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input id="searchInput" type="text" placeholder="Search movies, shows…" autocomplete="off"/>
+  </div>
+</nav>
+
+<div id="hero">
+  <div id="heroBg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">⭐ Top Rated</div>
+    <h1 class="hero-title" id="heroTitle">Loading…</h1>
+    <div class="hero-meta">
+      <div class="hero-rating">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <span id="heroRating">—</span>
+      </div>
+      <span class="hero-year" id="heroYear">—</span>
+      <span class="hero-genre" id="heroGenre"></span>
+    </div>
+    <p class="hero-overview" id="heroOverview">—</p>
+    <div class="hero-actions">
+      <button class="btn-primary" id="heroDetailsBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        View Details
+      </button>
+      <button class="btn-outline" onclick="nextHero()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        Next
+      </button>
+    </div>
+  </div>
+  <div class="hero-dots" id="heroDots"></div>
+</div>
+
+
+<main id="mainContent">
+
+
+  <div id="searchSection" class="section">
+    <div class="section-header">
+      <h2 class="section-title" id="searchHeading">Search Results</h2>
+    </div>
+    <div class="card-grid" id="searchGrid"></div>
+  </div>
+
+
+  <div class="section" id="trendingSection">
+    <div class="section-header">
+      <h2 class="section-title">Trending Now</h2>
+    </div>
+    <div class="tabs">
+      <button class="tab active" onclick="loadTrending('day', this)">Today</button>
+      <button class="tab" onclick="loadTrending('week', this)">This Week</button>
+    </div>
+    <div class="card-grid" id="trendingGrid"><div class="loader-wrap"><div class="spinner"></div></div></div>
+  </div>
+
+
+  <div class="section" id="moviesSection">
+    <div class="section-header">
+      <h2 class="section-title">Movies</h2>
+    </div>
+    <div class="tabs" id="movieTabs">
+      <button class="tab active" onclick="loadMovies('popular', this)">Popular</button>
+      <button class="tab" onclick="loadMovies('top_rated', this)">Top Rated</button>
+      <button class="tab" onclick="loadMovies('now_playing', this)">Now Playing</button>
+      <button class="tab" onclick="loadMovies('upcoming', this)">Upcoming</button>
+    </div>
+    <div class="genre-chips" id="movieGenreChips"></div>
+    <div class="card-grid" id="moviesGrid"><div class="loader-wrap"><div class="spinner"></div></div></div>
+  </div>
+
+
+  <div class="section" id="tvSection">
+    <div class="section-header">
+      <h2 class="section-title">TV Shows</h2>
+    </div>
+    <div class="tabs" id="tvTabs">
+      <button class="tab active" onclick="loadTV('popular', this)">Popular</button>
+      <button class="tab" onclick="loadTV('top_rated', this)">Top Rated</button>
+      <button class="tab" onclick="loadTV('on_the_air', this)">On Air</button>
+      <button class="tab" onclick="loadTV('airing_today', this)">Today</button>
+    </div>
+    <div class="card-grid" id="tvGrid"><div class="loader-wrap"><div class="spinner"></div></div></div>
+  </div>
+
+</main>
+
+<footer>
+  Powered by TMDB API · MoviFy © 2025
+</footer>
+
+
+<div id="modalOverlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalInner"></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
